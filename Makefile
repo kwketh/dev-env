@@ -13,7 +13,7 @@ eval:
 	$(DOCKER) run $(IMAGE) ${command}
 
 bash:
-	$(DOCKER) run -h $(HOSTNAME) --rm -it $(OPTS) $(IMAGE) /bin/zsh
+	$(DOCKER) run -h $(HOSTNAME) --rm -it -w "/root" $(IMAGE) /bin/zsh
 
 .PHONY: build eval bash
 

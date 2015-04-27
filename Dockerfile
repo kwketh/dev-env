@@ -25,9 +25,7 @@ RUN apt-get install -y cowsay fortune sl
 ENV PATH $PATH:/usr/games
 
 # zsh
-RUN apt-get install -y zsh
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
-RUN chsh -s `which zsh`
+RUN apt-get install -y zsh && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 ENV SHELL zsh
 
 # dotfiles

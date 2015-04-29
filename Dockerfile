@@ -2,31 +2,40 @@ FROM ubuntu:latest
 MAINTAINER Konrad Wieczork <keth@kwketh.com>
 ENV DEBIAN_FRONTEND noninteractive
 
-# Update base tools
-RUN apt-get update
+# Not very pretty script but seems the only way
+# to efficiently manage as few cached image and
+# for the script to be reasonably maintainable
+# to add new dependencies without long rebuild
+# times.
 
-# Development tools
-RUN apt-get install -y build-essential git-core git
+# Install core dependencies
+ADD ./sh/install_deps_core.sh /tmp/sh/install_deps_core.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_deps_core.sh
 
-# Useful tools
-RUN apt-get install -y coreutils curl tar nano net-tools wget
+# Install user-custom development tools
+ADD ./sh/install_deps_dev.sh /tmp/sh/install_deps_dev.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_deps_dev.sh
 
-# Editor and themes
-RUN apt-get install -y vim 
-
-# Python
-RUN apt-get install -y python python-dev python-pip
-
-# Ruby
-RUN apt-get install -y ruby ruby-dev
-
-# Classic fun tools
-RUN apt-get install -y cowsay fortune sl
-ENV PATH $PATH:/usr/games
-
-# zsh
-RUN apt-get install -y zsh && wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+# Install zsh
+ADD ./sh/setup_zsh.sh /tmp/sh/setup_zsh.sh 
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/setup_zsh.sh
 ENV SHELL zsh
 
-# dotfiles
-ADD dotfiles /root
+# Install utils
+ADD ./sh/install_utils.sh /tmp/sh/install_utils.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_utils.sh
+
+# Install other fun tools
+ADD ./sh/install_funtools.sh /tmp/sh/install_funtools.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_funtools.sh
+
+# Setup dotfiles
+ADD ./sh/setup_dotfiles.sh /tmp/sh/setup_dotfiles.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/setup_dotfiles.sh
+
+# Setup directories
+ADD ./sh/setup_dirs.sh /tmp/sh/setup_dirs.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/setup_dirs.sh
+
+ENTRYPOINT ["/bin/zsh"]
+

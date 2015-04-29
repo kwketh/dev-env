@@ -9,11 +9,5 @@ DOCKERFILE=Dockerfile
 build:
 	$(DOCKER) build -t $(IMAGE) .
 
-eval:
-	$(DOCKER) run $(IMAGE) ${command}
-
-bash:
-	$(DOCKER) run -h $(HOSTNAME) --rm -it -w "/root" $(IMAGE) /bin/zsh
-
-.PHONY: build eval bash
+.PHONY: build
 

@@ -48,7 +48,7 @@ if [ "$mutable" = "true" ]; then
     MOUNTFLAGS=""
 fi
 
-docker run -h $HOSTNAME --rm -it -w "/mnt" -v "$WORKDIR:/mnt$MOUNTFLAGS" $IMAGE
+docker run -h $HOSTNAME --rm -it -w "/workspace/$DIRNAME" -v "$WORKDIR:/workspace/$DIRNAME$MOUNTFLAGS" $IMAGE
 
 if [ "$mutable" = "true" ]; then
     echo "discarding temporary files."

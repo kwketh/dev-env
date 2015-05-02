@@ -11,3 +11,6 @@ apt-get install -y coreutils bsdmainutils
 
 # Core dependencies
 apt-get install -y wget curl
+
+# Colored command-line utils
+apt-get install -y colordiff

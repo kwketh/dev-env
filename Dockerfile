@@ -9,33 +9,37 @@ ENV DEBIAN_FRONTEND noninteractive
 # times.
 
 # Install core dependencies
-ADD ./sh/install_deps_core.sh /tmp/sh/install_deps_core.sh
-RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_deps_core.sh
+ADD ./sh/01_install_deps_core.sh /tmp/sh/01_install_deps_core.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/01_install_deps_core.sh
 
 # Install user-custom development tools
-ADD ./sh/install_deps_dev.sh /tmp/sh/install_deps_dev.sh
-RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_deps_dev.sh
+ADD ./sh/02_install_deps_dev.sh /tmp/sh/02_install_deps_dev.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/02_install_deps_dev.sh
 
 # Install zsh
-ADD ./sh/setup_zsh.sh /tmp/sh/setup_zsh.sh 
-RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/setup_zsh.sh
+ADD ./sh/03_setup_zsh.sh /tmp/sh/03_setup_zsh.sh 
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/03_setup_zsh.sh
 ENV SHELL zsh
 
+# Install binwalk (and all the additional dependencies)
+ADD ./sh/04_install_binwalk.sh /tmp/sh/04_install_binwalk.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/04_install_binwalk.sh
+
 # Install utils
-ADD ./sh/install_utils.sh /tmp/sh/install_utils.sh
-RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_utils.sh
+ADD ./sh/05_install_utils.sh /tmp/sh/05_install_utils.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/05_install_utils.sh
 
 # Install other fun tools
-ADD ./sh/install_funtools.sh /tmp/sh/install_funtools.sh
-RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/install_funtools.sh
+ADD ./sh/06_install_funtools.sh /tmp/sh/06_install_funtools.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/06_install_funtools.sh
 
 # Setup dotfiles
-ADD ./sh/setup_dotfiles.sh /tmp/sh/setup_dotfiles.sh
-RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/setup_dotfiles.sh
+ADD ./sh/07_setup_dotfiles.sh /tmp/sh/07_setup_dotfiles.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/07_setup_dotfiles.sh
 
 # Setup directories
-ADD ./sh/setup_dirs.sh /tmp/sh/setup_dirs.sh
-RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/setup_dirs.sh
+ADD ./sh/08_setup_dirs.sh /tmp/sh/08_setup_dirs.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/08_setup_dirs.sh
 
 ENTRYPOINT ["/bin/zsh"]
 

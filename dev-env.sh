@@ -33,6 +33,8 @@ else
     WORKDIR=$(realpath $WORKDIR)
 fi
 
+DIRNAME=$(basename $WORKDIR)
+
 if [ "$readonly" = "true" ]; then
     echo "dev-env: running in read-only mode."
     MOUNTFLAGS=":ro"

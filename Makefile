@@ -7,7 +7,7 @@ DOCKER=docker $(DOCKER_OPTS)
 DOCKERFILE=Dockerfile
 
 build:
-	$(DOCKER) build -t $(IMAGE) .
+	$(DOCKER) build -tq $(IMAGE) .
 
 .PHONY: build
 

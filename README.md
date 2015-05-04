@@ -8,8 +8,7 @@ Entering the environment is possible from any directory on the host machine with
  - Does not require installing hundreds of packages on the host machine
  - All packages in the DE stay up-to-date without any effort to update
  - Fault tolerant environment (any changes to system directories or packages in the DE are discarded at the end of the session)
- - No more package conflicts and/or errors. 
- Package conflicts and package installation issues are very unlikely considering all packages installed on the virtual machine are up-to-date and system directories being discarded
+ - Package conflicts and installation issues are very unlikely considering all packages installed in the DE are always up-to-date. On top of that any changes to the system directories are always discarded at the end of each session preventing any potential errors made to the packages
 
 ## Cons
  - Not everybody is a fan of terminal and doing ther development within it

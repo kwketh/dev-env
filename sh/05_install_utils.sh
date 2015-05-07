@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Core utils
-apt-get install -y vim tar nano net-tools curl wget
+apt-get install -y vim tar nano net-tools telnet curl wget telnet
 
 ## Classic tools
 apt-get install -y lynx
@@ -29,5 +29,4 @@ apt-get install -y tor gnupg
     ./autogen.sh && ./configure && make && sudo make install
   )
 )
-
 

@@ -1,8 +1,8 @@
 # dev-env
 
-The repository contains files for managing a virtualized development environment (DE).
+The repository contains files for managing a virtualized development environment.
 
-Entering the environment is possible from any directory on the host machine with `dev-env` command, after which the host directory is mounted in the DE as the workspace folder.
+Entering the development environment (DE) is possible from any directory on the host machine with `dev-env` command, after which the host current directory is mounted in the DE as the workspace folder.
 
 ## Pros
  - Does not require installing hundreds of packages on the host machine

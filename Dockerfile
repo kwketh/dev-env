@@ -42,4 +42,5 @@ ADD ./sh/08_setup_dirs.sh /tmp/sh/08_setup_dirs.sh
 RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/08_setup_dirs.sh
 
 ENTRYPOINT ["/bin/zsh"]
+EXPOSE 8081
 

@@ -6,6 +6,9 @@ apt-get install -y vim tar nano net-tools telnet curl wget telnet
 ## Classic tools
 apt-get install -y lynx
 
+## Workflow tools
+apt-get install -y tree
+
 ## Image utils
 apt-get install -y ImageMagick
 

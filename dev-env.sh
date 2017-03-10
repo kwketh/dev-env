@@ -5,7 +5,7 @@ TAG=latest
 DOCKER=docker
 IMAGE=$IMAGE_NAME:$TAG
 WORKDIR=$1
-SESSIONID=$(cat /dev/urandom | head -c 256 | md5 | head -c 8)
+SESSIONID=$(cat /dev/urandom | head -c 256 | md5sum | head -c 8)
 MOUNTFLAGS=""
 
 # Set default flags

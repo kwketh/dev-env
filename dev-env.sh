@@ -11,11 +11,13 @@ MOUNTFLAGS=""
 # Set default flags
 readonly='false'
 mutable='false'
+network='bridge'
 
 # Parse flags
-while getopts 'rm' flag; do
+while getopts 'rnm' flag; do
   case "${flag}" in
     r) readonly='true'; WORKDIR=$2 ;;
+    n) network='none'; WORKDIR=$2 ;;
     m) if [ "$readonly" = "true" ]; then
          mutable=true
        else
@@ -40,6 +42,11 @@ if [ "$readonly" = "true" ]; then
     MOUNTFLAGS=":ro"
 fi
 
+if [ "$network" = "none" ]; then
+    echo "dev-env: running in no network mode."
+    MOUNTFLAGS=":ro"
+fi
+
 if [ "$mutable" = "true" ]; then
     SESSIONDIR="$HOME/.tmp_$SESSIONID"
     echo "         (files are mutable but will be discarded)"
@@ -48,7 +55,7 @@ if [ "$mutable" = "true" ]; then
     MOUNTFLAGS=""
 fi
 
-docker run -h $HOSTNAME --rm -it -w "/workspace/$DIRNAME" -v "$WORKDIR:/workspace/$DIRNAME$MOUNTFLAGS" -p 8081:8081 $IMAGE
+docker run -h $HOSTNAME --rm -it -w "/workspace/$DIRNAME" -v "$WORKDIR:/workspace/$DIRNAME$MOUNTFLAGS" -p 8081:8081 --network $network $IMAGE
 
 if [ "$mutable" = "true" ]; then
     echo "discarding temporary files."

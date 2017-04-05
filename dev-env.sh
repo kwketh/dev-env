@@ -47,7 +47,6 @@ fi
 
 if [ "$network" = "none" ]; then
     echo "dev-env: running in no network mode."
-    MOUNTFLAGS=":ro"
 fi
 
 if [ "$mutable" = "true" ]; then

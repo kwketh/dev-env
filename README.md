@@ -39,6 +39,15 @@ Read-only flag (`dev-env -r`) mounts the host current directory as read-only wit
 
 Read-only + mutable flag (`dev-env -rm`) copies the current host directory to a temporary location and mounts it in the DE. The directory is then automatically deleted at the end of the session, therefore no changes are done to the host files.
 
+Optional flag to use no network (`dev-env -n`) guarantees no data via network can get out from the container
+
+### Optional env variables
+
+Run any image (i.e. an older i386 ubuntu) by providing IMAGE in the environment variables:
+```
+IMAGE=ioft/i386-ubuntu:14.04.3 dev-env
+```
+
 ## Packages I use
  - Command-line utilities: `zsh` `coreutils` `bsdmainutils` `colordiff`
  - Core development tools: `build-essential` `git`

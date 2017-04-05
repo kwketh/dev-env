@@ -1,12 +1,15 @@
 #!/bin/bash
 HOSTNAME=dev-env
-IMAGE_NAME=kwketh/dev-env
 TAG=latest
 DOCKER=docker
-IMAGE=$IMAGE_NAME:$TAG
 WORKDIR=$1
 SESSIONID=$(cat /dev/urandom | head -c 256 | md5 | head -c 8)
 MOUNTFLAGS=""
+
+if [ -z "$IMAGE" ]; then
+	IMAGE_NAME=kwketh/dev-env
+	IMAGE=$IMAGE_NAME:$TAG
+fi
 
 # Set default flags
 readonly='false'

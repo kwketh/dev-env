@@ -3,7 +3,7 @@ HOSTNAME=dev-env
 TAG=latest
 DOCKER=docker
 WORKDIR=$1
-SESSIONID=$(cat /dev/urandom | head -c 256 | md5 | head -c 8)
+SESSIONID=$(cat /dev/urandom | head -c 256 | md5sum | head -c 8)
 FLAGS=""
 MOUNTFLAGS=""
 

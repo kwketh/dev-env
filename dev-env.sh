@@ -4,17 +4,29 @@ TAG=latest
 DOCKER=docker
 WORKDIR=$1
 SESSIONID=$(cat /dev/urandom | head -c 256 | md5 | head -c 8)
+FLAGS=""
 MOUNTFLAGS=""
 
 if [ -z "$IMAGE" ]; then
-	IMAGE_NAME=kwketh/dev-env
-	IMAGE=$IMAGE_NAME:$TAG
+    IMAGE_NAME=kwketh/dev-env
+    IMAGE=$IMAGE_NAME:$TAG
+fi
+
+if [ -z "$NETWORK" ]; then
+    NETWORK='bridge'
+fi
+
+if [ ! -z "$GITCONFIG" ]; then
+    FLAGS="$FLAGS -v \"$GITCONFIG:/root/.gitconfig\""
+fi
+
+if [ ! -z "$BASHPROFILE" ]; then
+    FLAGS="$FLAGS -v \"$BASHPROFILE:/root/.bash_profile\""
 fi
 
 # Set default flags
 readonly='false'
 mutable='false'
-network='bridge'
 
 # Parse flags
 while getopts 'rnm' flag; do
@@ -45,7 +57,7 @@ if [ "$readonly" = "true" ]; then
     MOUNTFLAGS=":ro"
 fi
 
-if [ "$network" = "none" ]; then
+if [ "$NETWORK" = "none" ]; then
     echo "dev-env: running in no network mode."
 fi
 
@@ -57,7 +69,9 @@ if [ "$mutable" = "true" ]; then
     MOUNTFLAGS=""
 fi
 
-docker run -h $HOSTNAME --rm -it -w "/workspace/$DIRNAME" -v "$WORKDIR:/workspace/$DIRNAME$MOUNTFLAGS" -p 8081:8081 --network $network $IMAGE
+COMMAND="docker run -h $HOSTNAME --rm -it -w \"/workspace/$DIRNAME\" -v \"$WORKDIR:/workspace/$DIRNAME$MOUNTFLAGS\" $FLAGS -p 8081:8081 --network $NETWORK $IMAGE"
+
+eval $COMMAND
 
 if [ "$mutable" = "true" ]; then
     echo "discarding temporary files."

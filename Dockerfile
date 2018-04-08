@@ -41,6 +41,13 @@ RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/07_setup_dotfiles.sh
 ADD ./sh/08_setup_dirs.sh /tmp/sh/08_setup_dirs.sh
 RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/08_setup_dirs.sh
 
+# Install modern tools
+ADD ./sh/09_modern_tools.sh /tmp/sh/09_modern_tools.sh
+RUN chmod +x /tmp/sh/*.sh && . /tmp/sh/09_modern_tools.sh
+
+ADD bin/* /root/bin
+RUN chmod +x /root/bin/*
+
 ENTRYPOINT ["/bin/zsh"]
 EXPOSE 8081
 

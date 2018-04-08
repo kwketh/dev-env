@@ -1,6 +1,6 @@
 ## binwalk
 git clone https://github.com/devttys0/binwalk /tmp/binwalk
-(cd /tmp/binwalk && sudo python setup.py install)
+(cd /tmp/binwalk && python setup.py install)
 
 # Although all run-time dependencies are optional, the python-lzma module is highly recommended for improving the reliability of signature scans
 apt-get install -y python-lzma
@@ -23,16 +23,16 @@ git clone https://github.com/devttys0/sasquatch /tmp/sasquatch
 
 # Install sasquatch to extract non-standard SquashFS images
 apt-get install -y zlib1g-dev liblzma-dev liblzo2-dev
-(cd /tmp/sasquatch && make && sudo make install)
+(cd /tmp/sasquatch && make && make install)
 
 # Install jefferson to extract JFFS2 file systems
 pip install cstruct
 git clone https://github.com/sviehb/jefferson /tmp/jefferson
-(cd /tmp/jefferson && sudo python setup.py install)
+(cd /tmp/jefferson && python setup.py install)
 
 # Install unstuff (closed source) to extract StuffIt archive files
 (
   cd /tmp
   wget -O - http://my.smithmicro.com/downloads/files/stuffit520.611linux-i386.tar.gz | tar -zxv
-  sudo cp bin/unstuff /usr/local/bin/
+  cp bin/unstuff /usr/local/bin/
 )

@@ -40,7 +40,7 @@ apt-get install -y proxychains
   tar -xzf torsocks-2.0.0.tar.gz
   (
     cd torsocks-2.0.0
-    ./autogen.sh && ./configure && make && sudo make install
+    ./autogen.sh && ./configure && make && make install
   )
 )
 

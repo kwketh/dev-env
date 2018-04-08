@@ -69,7 +69,7 @@ if [ "$mutable" = "true" ]; then
     MOUNTFLAGS=""
 fi
 
-COMMAND="docker run -h $HOSTNAME --rm -it -w \"/workspace/$DIRNAME\" -v \"$WORKDIR:/workspace/$DIRNAME$MOUNTFLAGS\" $FLAGS -p 8081:8081 --network $NETWORK $IMAGE"
+COMMAND="docker run -h $HOSTNAME --rm -it -w \"/workspace/$DIRNAME\" -v \"$WORKDIR:/workspace/$DIRNAME$MOUNTFLAGS\" $FLAGS --network $NETWORK $IMAGE"
 
 eval $COMMAND
 
